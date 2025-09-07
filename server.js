@@ -12,6 +12,18 @@ app.use(cors());
 const movieRoutes = require("./routes/movieRoutes");
 app.use("/api/movies", movieRoutes);
 
+// 404 handler
+app.use((req, res, next) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
+});
+
+
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI || "mongodb://localhost:27017/moviedb")
