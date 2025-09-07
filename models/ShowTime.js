@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const showTimeSchema = new mongoose.Schema({
+const showtimeSchema = new mongoose.Schema({
   movieId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Movie",
@@ -16,4 +16,4 @@ const showTimeSchema = new mongoose.Schema({
   price: { type: Number, required: true },
 });
 
-module.exports = mongoose.model("ShowTime", showTimeSchema);
+module.exports = mongoose.model("Showtime", showtimeSchema);
