@@ -4,6 +4,20 @@ const Movie = require("../models/Movie");
 // Add a new movie
 exports.addMovie = async (req, res) => {
   try {
+    const existingMovie = await Movie.findOne({
+      title: req.body.title,
+      releaseDate: req.body.releaseDate,
+    });
+
+    if (existingMovie) {
+      // 3. Handle DB-level duplicate error
+      if (err.code === 11000) {
+        res.status(400).json({ error: "Duplicate movie not allowed" });
+      } else {
+        res.status(400).json({ error: err.message });
+      }
+    }
+
     const movie = new Movie(req.body);
     await movie.save();
     res.status(201).json(movie);

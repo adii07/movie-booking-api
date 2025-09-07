@@ -12,4 +12,7 @@ const movieSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+// Prevent duplicate movies: title + releaseDate must be unique
+movieSchema.index({ title: 1, releaseDate: 1 }, { unique: true });
+
 module.exports = mongoose.model("Movie", movieSchema);
