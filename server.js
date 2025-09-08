@@ -11,6 +11,10 @@ app.use(cors());
 // Routes
 const movieRoutes = require("./routes/movieRoutes");
 app.use("/api/movies", movieRoutes);
+app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/theatres", require("./routes/theatreRoutes"));
+app.use("/api/showtimes", require("./routes/showtimeRoutes"));
+app.use("/api/bookings", require("./routes/bookingRoutes"));
 
 // 404 handler
 app.use((req, res, next) => {
