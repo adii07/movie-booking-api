@@ -63,3 +63,23 @@ exports.deleteMovie = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+exports.getTopGrossingMovies = async (req, res) => {
+  try {
+    // Top 10 grossing
+    const topGrossing = await Movie.find()
+      .sort({ grossCollection: -1 })
+      .limit(10);
+
+    // Top 10 rated
+    const topRated = await Movie.find().sort({ rating: -1 }).limit(10);
+
+    res.json({
+      topGrossing,
+      topRated,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
